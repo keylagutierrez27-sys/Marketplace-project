@@ -1,4 +1,4 @@
-Aquí tienes los 5 diagramas del PDF pasados a sintaxis Mermaid, listos para pegar en tu `.md`.
+
 **ARQUITECTURA C4**
 
 **1. Diagrama de contexto**
