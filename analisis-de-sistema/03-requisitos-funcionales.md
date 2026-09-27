@@ -26,3 +26,16 @@ Listado formal de los requerimientos funcionales extraídos de la propuesta téc
 ## 5. Módulo de Administración e Informes
 * **RF-12:** El administrador general visualizará reportes estadísticos consolidados de ventas, cantidad de publicaciones activas y volumen de transacciones segmentadas por facultades o categorías.
 * **RF-13:** El sistema mantendrá registros de auditoría y generará reportes exportables en formato Excel sobre incidencias y disputas entre usuarios.
+
+---
+
+## Relación entre Historias de Usuario (HU) y Requisitos Funcionales (RF)
+
+| Historia de Usuario | Descripción breve | Requisitos Funcionales Asociados |
+| :--- | :--- | :--- |
+| **HU-01** | Autenticación Institucional | RF-01, RF-02, RF-03 |
+| **HU-02** | Publicación de Productos Usados | RF-04, RF-06 |
+| **HU-03** | Publicación de Servicios Profesionales | RF-05, RF-06 |
+| **HU-04** | Búsqueda Avanzada y Filtros | RF-06 |
+| **HU-05** | Pago Directo Peer-to-Peer y Comprobante | RF-07, RF-08, RF-09 |
+| **HU-06** | Reserva de Salas y Tutorías en Tiempo Real | RF-10, RF-11 |
