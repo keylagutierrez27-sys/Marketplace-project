@@ -7,10 +7,10 @@
 > Plataforma web y móvil que conecta a la comunidad universitaria para comprar/vender productos usados, contratar servicios académicos y reservar salas u horarios.
 
 ## 👩‍🎓 Integrante
-| Nombre | Código |
+| Nombre |
 |---|---|
-| Gutierrez Gutierrez, Keyla Jhazym | 27220300 |
-
+| Gutierrez Gutierrez, Keyla Jhazym |
+| Yanasupo Romero, Thayli Roxana |
 ## 📖 Descripción
 UniMarket conecta a **estudiantes compradores** y **estudiantes proveedores** dentro del campus, dirigido a una comunidad de **15,000 estudiantes**, con:
 - 📚 Compra/venta de libros y productos usados
