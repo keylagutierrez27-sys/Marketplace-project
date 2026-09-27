@@ -1,14 +1,12 @@
 # 🛒 UniMarket — Marketplace de servicios y productos universitarios
 
 ![Curso](https://img.shields.io/badge/Curso-IS--488%20Arquitectura%20de%20Software-blue)
-![Semestre](https://img.shields.io/badge/Semestre-2026--II-lightgrey)
-![Estado](https://img.shields.io/badge/Estado-En%20desarrollo-yellow)
-
+!
 > Plataforma web y móvil que conecta a la comunidad universitaria para comprar/vender productos usados, contratar servicios académicos y reservar salas u horarios.
 
 ## 👩‍🎓 Integrante
 | Nombre |
-|---|---|
+|---|
 | Gutierrez Gutierrez, Keyla Jhazym |
 | Yanasupo Romero, Thayli Roxana |
 ## 📖 Descripción
