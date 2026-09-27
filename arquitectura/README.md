@@ -1,0 +1,18 @@
+# 🛒 UniMarket — Marketplace de servicios y productos universitarios
+
+![Curso](https://img.shields.io/badge/Curso-IS--488%20Arquitectura%20de%20Software-blue)
+![Semestre](https://img.shields.io/badge/Semestre-2026--II-lightgrey)
+![Estado](https://img.shields.io/badge/Estado-En%20desarrollo-yellow)
+
+> Plataforma web y móvil que conecta a la comunidad universitaria para comprar/vender productos usados, contratar servicios académicos y reservar salas u horarios.
+
+## 👩‍🎓 Integrante
+| Nombre | Código |
+|---|---|
+| Gutierrez Gutierrez, Keyla Jhazym | 27220300 |
+
+## 📖 Descripción
+UniMarket conecta a **estudiantes compradores** y **estudiantes proveedores** dentro del campus, dirigido a una comunidad de **15,000 estudiantes**, con:
+- 📚 Compra/venta de libros y productos usados
+- 🛠️ Servicios: tutorías, diseño, programación, impresión
+- 📅 Reserva de salas y horarios de tutoría
