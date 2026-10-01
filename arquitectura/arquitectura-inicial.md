@@ -10,10 +10,10 @@
 ![Diagrama de componentes](img/diagrama-componentes.png)
 
 ## Arquitectura técnica v2.0
-![Arquitectura técnica](img/arquitectura-tecnica.png)
+![Arquitectura técnica](img/arquitectura-tecnica.jpeg)
 
 ## Diagrama de secuencia
-![Diagrama de secuencia](img/diagrama-secuencia.png)
+![Diagrama de secuencia](img/diagrama-secuencia.jpeg)
 
 ## Descripción
 
