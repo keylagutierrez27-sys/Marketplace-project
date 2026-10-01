@@ -1,28 +1,86 @@
 # 04. Atributos de Calidad (Requisitos No Funcionales) - UniMarket
 
-De acuerdo con la arquitectura técnica y el presupuesto optimizado planteado en la propuesta, se definen los siguientes atributos de calidad bajo escenarios de arquitectura de software:
+Este documento define los atributos de calidad (también conocidos como no funcionales o requerimientos de arquitectura) del sistema **UniMarket** en su versión **v2.0**, basados en las normas de calidad de software y en las restricciones del proyecto universitario.
 
 ---
 
-## 1. Restricción de Costo y Eficiencia Económica
-* **Definición:** La solución arquitectónica debe sostenerse bajo un modelo de costos ultra-bajo u operación gratuita (Free Tiers y PaaS ligeros), estimando un costo mensual real entre S/. 65.00 y S/. 85.00 soles para dar soporte a una comunidad proyectada de 15,000 estudiantes.
-* **Métrica:** Presupuesto operativo mensual $\le \text{S/. } 100.00$.
+## 1. Modificabilidad y Mantenibilidad
 
-## 2. Rendimiento y Escalabilidad (Performance)
-* **Definición:** El backend desplegado en contenedores ligeros (Node.js/Express en Render) y el motor de base de datos relacional (Supabase PostgreSQL) deben responder de manera fluida ante consultas concurrentes de búsqueda y registro de transacciones.
-* **Métrica:** Tiempos de respuesta en consultas de catálogo inferiores a $2.0$ segundos bajo concurrencia moderada.
+### Descripción
 
-## 3. Disponibilidad y Confiabilidad (Availability)
-* **Definición:** El uso de servicios en la nube con CDN global (Vercel para la aplicación web SPA/Next.js) garantiza alta disponibilidad y despliegues automáticos con certificados SSL gratuitos.
-* **Métrica:** Disponibilidad del servicio web superior al $99.0\%$ anual respaldada por la infraestructura en la nube.
+Capacidad del sistema para ser modificado de forma eficiente (añadir nuevas características, corregir errores o adaptar el entorno) sin comprometer la estabilidad general.
 
-## 4. Seguridad y Privacidad (Security)
-* **Definición:** Las credenciales de acceso y sesiones de usuario deben protegerse mediante protocolos estándar de la industria (OAuth 2.0 / OpenID Connect) vinculados estrictamente al directorio institucional universitario.
-* **Métrica:** Cero tolerancia a accesos no autorizados sin validación previa del correo institucional (`@universidad.edu.pe`).
+### Estrategia Arquitectónica
 
-## 5. Portabilidad y Compatibilidad
-* **Definición:** La aplicación debe ser accesible tanto desde navegadores web modernos en computadoras como desde dispositivos móviles mediante una arquitectura multiplataforma (React Native).
+- Se adopta una arquitectura de **monolito modular** basada en principios de **Domain-Driven Design (DDD)**, donde cada módulo (Marketplace, Tutorías, Autenticación, etc.) se encuentra estrictamente separado a nivel de código en directorios independientes.
+- El backend utiliza **Fastify / Node.js** con una estructura limpia y desacoplada, lo que permite refactorizar o extraer componentes hacia microservicios en el futuro si la universidad lo requiere, sin necesidad de rediseñar toda la aplicación desde cero.
 
-## 6. Mantenibilidad y Modularidad
-* **Arquitectura Modular (Clean Architecture / Componentes):** El backend de la API está estructurado en componentes desacoplados (Gestor de Usuarios, Controlador de Catálogo, Controlador de Servicios, Controlador de Reservas y Controlador de Pagos), lo que facilita realizar modificaciones, depuraciones y pruebas unitarias de forma independiente sin afectar al resto del sistema.
-* **Despliegue Continuo Automatizado:** Integración con plataformas en la nube (Vercel para Frontend y Render para Backend) que permiten despliegues automatizados directos desde el repositorio de GitHub, reduciendo el esfuerzo operativo de mantenimiento.
+
+---
+
+
+## 2. Escalabilidad
+
+### Descripción
+
+Capacidad del sistema para soportar el crecimiento de la demanda de la comunidad universitaria (hasta **15,000 estudiantes**) manteniendo un rendimiento óptimo.
+
+### Estrategia Arquitectónica
+
+- **Backend Stateless:** El servidor de aplicaciones se diseña sin estado en memoria, permitiendo escalar horizontalmente el monolito modular añadiendo múltiples instancias detrás de un balanceador de carga en la nube cuando la concurrencia aumente.
+- **Base de Datos Desacoplada:** La base de datos relacional (**Supabase PostgreSQL Cluster**) opera de forma independiente al servidor de aplicaciones.
+- **Capa de Borde (Cloudflare):** El uso de CDN, caché inteligente y distribución global (**Edge Delivery Network**) absorbe la mayor parte del tráfico estático, protegiendo al servidor de origen de sobrecargas innecesarias.
+
+---
+
+## 3. Disponibilidad y Fiabilidad 
+
+## Descripción
+
+Garantía de que la plataforma se encuentre operativa y accesible de manera continua para los estudiantes y administradores.
+
+### Estrategia Arquitectónica
+
+- Uso de servicios en la nube de alta disponibilidad con capas administradas (como **Render/Railway** para el API Cloud y **Supabase** para el cluster de PostgreSQL y Storage).
+- Reducción de puntos únicos de fallo mediante la infraestructura redundante de **Cloudflare**, que asegura alta disponibilidad (Uptime) incluso ante fluctuaciones de tráfico o intentos de ataques perimetrales.
+
+---
+
+## 4. Rendimiento y Eficiencia (Performance)
+
+### Descripción
+
+Tiempos de respuesta rápidos y uso eficiente de los recursos computacionales y de red.
+
+### Estrategia Arquitectónica
+
+- **Optimización de Activos:** Compresión y entrega de contenido estático a través de la red de distribución de contenidos (**CDN**) de Cloudflare con políticas de caché agresivas para assets e imágenes.
+- **Consultas Eficientes:** Uso de índices optimizados en **PostgreSQL** para las búsquedas y filtrados rápidos en el catálogo de productos y servicios.
+- **PWA (Progressive Web App):** El frontend desarrollado en **React / Next.js** está optimizado para ofrecer una carga inicial rápida y una experiencia fluida tanto en navegadores web de escritorio como en dispositivos móviles de gama media/baja.
+
+---
+
+## 5. Seguridad (Security)
+
+### Descripción
+
+Protección de los datos confidenciales de la comunidad universitaria, control de accesos y mitigación de amenazas digitales.
+
+### Estrategia Arquitectónica
+
+- **Cifrado en Tránsito:** Uso obligatorio de **HTTPS** con certificados **SSL/TLS** administrados mediante Cloudflare.
+- **Protección Perimetral (WAF):** Implementación de capas de defensa contra ataques DDoS, inyecciones y tráfico malicioso mediante el **Cloudflare Security Layer**.
+- **Autenticación Institucional:** Validación estricta de usuarios mediante correo electrónico corporativo (`@universidad.edu.pe`) y tokens de seguridad seguros gestionados por **Supabase Auth**.
+- **Control de Acceso Basado en Roles (RBAC):** Restricción de permisos a nivel de API para garantizar que solo los usuarios autorizados (**Comprador, Proveedor o Administrador**) realicen acciones sobre los recursos correspondientes.
+
+---
+
+## 6. Costo y Restricción Presupuestaria (Eficiencia Operativa)
+
+### Descripción
+
+Cumplimiento estricto del presupuesto operativo reducido establecido para el proyecto.
+
+### Estrategia Arquitectónica
+
+- La solución está diseñada para mantenerse estrictamente dentro de un presupuesto máximo de **S/. 100 soles mensuales**, aprovechando las capas gratuitas (**Free Tiers**) y planes económicos de servicios modernos en la nube (**Vercel, Render, Supabase y Cloudflare**), optimizando el dominio `.PE` corporativo sin incurrir en costos de infraestructura empresarial sobredimensionada.
