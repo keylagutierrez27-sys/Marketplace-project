@@ -13,7 +13,7 @@
 ![Arquitectura técnica](img/arquitectura-tecnica.jpeg)
 
 ## Diagrama de secuencia
-![Diagrama de secuencia](img/diagrama-secuencia.jpeg)
+![Diagrama de secuencia](img/diagrama-secuencia.png)
 
 ## Descripción
 
