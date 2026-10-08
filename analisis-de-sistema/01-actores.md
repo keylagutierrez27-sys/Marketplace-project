@@ -1,47 +1,56 @@
-# Actores y Perfiles del Sistema - UniMarket
+# 01 - Actores del Sistema (UniMarket)
 
-Este documento define los actores del sistema de acuerdo con la arquitectura propuesta en el proyecto **UniMarket** (Marketplace de servicios y productos universitarios).
-
----
-
-## 1. Actores Principales (Usuarios del Sistema)
-
-### 1.1. Estudiante Comprador
-* **Descripción:** Estudiante perteneciente a la comunidad universitaria que utiliza la plataforma web o móvil para adquirir bienes o contratar servicios académicos dentro del campus.
-* **Responsabilidades y Acciones:**
-  * Iniciar sesión mediante autenticación institucional de red (`nombre_estudiante@unsch.edu.pe`).
-  * Buscar y filtrar productos (libros, artículos usados) y servicios (tutorías, diseño, programación, impresión) mediante búsqueda avanzada.
-  * Realizar compras, reservas de salas de estudio o agendamiento de citas de tutoría.
-  * Realizar pagos directos mediante transferencias o billeteras digitales (Yape/Plin) cargando su comprobante digital.
-  * Evaluar y calificar a los estudiantes proveedores tras recibir el producto o servicio.
-
-### 1.2. Estudiante Proveedor
-* **Descripción:** Estudiante universitario que ofrece bienes tangibles o servicios profesionales especializados a la comunidad estudiantil a través de la plataforma.
-* **Responsabilidades y Acciones:**
-  * Registrar y gestionar su portafolio de servicios (tarifas por hora o proyecto) o catálogo de productos (categoría, estado, precio e imágenes).
-  * Administrar la disponibilidad de horarios en tiempo real para tutorías o reserva de salas.
-  * Validar comprobantes de pago digitales y confirmar transacciones en tiempo real.
-  * Gestionar el ciclo de vida de sus ventas y entregas.
+En este documento se definen los actores que interactúan con el sistema **UniMarket**, especificando su rol, objetivos y nivel de participación dentro de la plataforma de marketplace universitario.
 
 ---
 
-## 2. Actores de Administración
+## 1. Estudiante Comprador (`@person`)
 
-### 2.1. Administrador General
-* **Descripción:** Personal designado por la institución universitaria o encargado del sistema para la supervisión global de la plataforma.
-* **Responsabilidades y Acciones:**
-  * Visualizar reportes estadísticos de ventas, cantidad de publicaciones activas y volumen de transacciones por facultades o categorías.
-  * Consultar registros de auditoría y generar reportes exportables en formato Excel sobre incidencias o disputas entre usuarios.
+* **Descripción:** Es el actor principal que pertenece a la comunidad universitaria y utiliza la plataforma para adquirir bienes o contratar servicios académicos.
+* **Tipo:** Actor primario / Humano.
+* **Autenticación:** Obligatoria mediante correo institucional (`@universidad.edu.pe`) y contraseña de red.
+* **Objetivos y Responsabilidades:**
+  * Explorar el catálogo general de productos (libros, artículos usados) y servicios profesionales (tutorías, diseño, programación, impresión).
+  * Realizar búsquedas avanzadas y aplicar filtros por categoría, precio y valoración.
+  * Enviar solicitudes de compra o reservas de salas de estudio y horarios de tutoría.
+  * Efectuar pagos directos Peer-to-Peer (Yape, Plin o transferencias) y cargar el comprobante digital (voucher) en el sistema.
+  * Recibir notificaciones push o por correo electrónico sobre el estado de sus pedidos y reservas.
 
 ---
 
-## 3. Sistemas Externos (Actores de Integración)
+## 2. Estudiante Proveedor (`@person`)
 
-### 3.1. Sistema de Autenticación Institucional (SSO / OAuth 2.0)
-* **Descripción:** Servicio externo de la universidad que valida las credenciales corporativas y el correo institucional de los estudiantes.
+* **Descripción:** Estudiante de la comunidad universitaria que oferta bienes o servicios profesionales dentro del marketplace para generar ingresos o intercambiar recursos académicos.
+* **Tipo:** Actor primario / Humano.
+* **Autenticación:** Obligatoria mediante correo institucional (`@universidad.edu.pe`) y asignación de rol de proveedor.
+* **Objetivos y Responsabilidades:**
+  * Publicar bienes especificando categoría, estado, precio e imágenes de los productos.
+  * Registrar portafolios y tarifas (por hora o por proyecto) para servicios de tutorías, diseño, programación e impresión.
+  * Gestionar en tiempo real la disponibilidad de horarios para evitar cruces o duplicidad de citas y reservas.
+  * Validar en tiempo real los comprobantes de pago subidos por los compradores y confirmar la entrega del producto o servicio.
+  * Visualizar su historial de ventas y reputación dentro de la plataforma.
 
-### 3.2. Pasarela de Pagos (Yape / Plin / Transferencia Directa)
-* **Descripción:** Mecanismo de pagos Peer-to-Peer que procesa y muestra los datos o códigos QR del estudiante proveedor para eliminar intermediarios.
+---
 
-### 3.3. Servicio de Notificaciones Externo (Firebase / Correo)
-* **Descripción:** Mecanismo que despacha alertas push y correos de confirmación ante cambios de estado en compras, pedidos y reservas.
+## 3. Administrador (`@person`)
+
+* **Descripción:** Usuario encargado de la supervisión, control y mantenimiento general de la plataforma, asegurando el correcto funcionamiento del marketplace.
+* **Tipo:** Actor secundario / Operativo.
+* **Autenticación:** Credenciales de acceso con privilegios elevados del sistema.
+* **Objetivos y Responsabilidades:**
+  * Supervisar la correcta gestión de usuarios, cuentas institucionales y roles.
+  * Monitorear el catálogo de publicaciones activas y moderar el contenido.
+  * Visualizar reportes estadísticos de ventas, volumen de transacciones e interacciones por facultades o categorías.
+  * Gestionar registros de auditoría y generar reportes exportables en formato Excel para la resolución de incidencias o disputas entre usuarios.
+
+---
+
+## 4. Sistemas y Actores Externos (`@software` / Infraestructura)
+
+Además de los usuarios humanos, el sistema interactúa con los siguientes componentes externos descritos en la arquitectura:
+
+* **Servicio de Autenticación Institucional (SSO / OAuth 2.0):** Valida la identidad y pertenencia de los estudiantes a la comunidad universitaria mediante el correo corporativo.
+* **Plataforma de Pagos P2P (Yape / Plin / Transferencias Bancarias):** Medios externos de pagos directos utilizados entre los estudiantes, operando sin retención ni procesamiento de fondos por parte de UniMarket.
+* **Servicio de Notificaciones (Firebase Cloud Messaging / Correo):** Envía alertas automáticas y correos de confirmación ante cambios de estado en pedidos, ventas o reservas.
+* **Capa Perimetral Cloudflare (DNS, HTTPS/SSL-TLS, CDN y WAF):** Protege, enruta y optimiza el tráfico de la plataforma asegurando el cifrado de las comunicaciones.
+* **Servicio de Inteligencia Artificial (Asistente Ligero):** Componente opcional basado en APIs o modelos open-source para interpretar consultas en lenguaje natural y sugerir recomendaciones relevantes.

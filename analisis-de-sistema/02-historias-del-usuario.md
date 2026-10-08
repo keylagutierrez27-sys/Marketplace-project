@@ -46,23 +46,60 @@ A continuación se detallan las historias de usuario clave agrupadas por módulo
 
 ## Módulo: Transacciones y Pagos
 
-### HU-05: Pago Directo Peer-to-Peer y Comprobante
-* **Como** estudiante comprador,
-* **quiero** visualizar los datos o código QR de Yape/Plin del proveedor y subir mi comprobante digital,
-* **para** completar la transacción de forma directa y sin intermediarios.
-* **Criterios de Aceptación:**
-  1. Visualización del QR o número del proveedor en la pantalla de pago de la orden.
-  2. Campo para adjuntar captura del voucher o comprobante digital.
-  3. Confirmación en tiempo real por parte del proveedor.
+### HU05: Realizar Pagos Directos P2P
+
+**Como** estudiante comprador,
+
+**quiero** visualizar los datos o el código QR de pago (Yape, Plin o transferencia) del estudiante proveedor,
+
+**para** realizar la transacción de forma directa sin intermediarios.
+
+#### Criterios de Aceptación
+
+  1. El sistema debe mostrar los datos de pago exactos del roveedor al confirmar la orden.
+  2. No debe haber retención ni procesamiento de fondos por parte de la plataforma (modelo P2P puro).
+
+### HU06: Carga de Comprobantes y Validación
+
+**Como** estudiante comprador y proveedor,
+
+**quiero** subir el comprobante digital (voucher) y que el proveedor pueda confirmarlo en tiempo real,
+
+**para** asegurar la trazabilidad y cerrar la transacción exitosamente.
+
+#### Criterios de Aceptación
+
+  1. El comprador debe poder adjuntar la imagen del comprobante de pago.
+  2. El proveedor recibirá una alerta para verificar el depósito y confirmar la entrega o servicio, generando una constancia virtual.
+
 
 ---
 
 ## Módulo: Reservas y Horarios
 
-### HU-06: Reserva de Salas y Tutorías en Tiempo Real
+### HU-07: Reserva de Salas y Tutorías en Tiempo Real
 * **Como** estudiante comprador,
 * **quiero** visualizar la disponibilidad de horarios en tiempo real para tutorías o salas,
 * **para** evitar cruces o duplicidad de citas.
 * **Criterios de Aceptación:**
   1. Calendario interactivo con franjas horarias ocupadas y libres.
   2. Envío automático de confirmación de reserva al completarse el proceso.
+
+
+---
+
+
+## Módulo: Administración e Informes
+
+### HU08: Visualización de Reportes Estadísticos
+
+**Como** administrador general,
+
+**quiero** visualizar reportes estadísticos de ventas, publicaciones activas y volumen de transacciones por facultad o categoría,
+
+**para** supervisar el rendimiento y la actividad de la plataforma.
+
+#### Criterios de Aceptación
+
+  1. El panel de administración debe mostrar métricas actualizadas de la comunidad (hasta 15,000 estudiantes).
+  2. Se deben incluir registros de auditoría y la opción de exportar reportes en formato Excel sobre disputas o incidencias.
