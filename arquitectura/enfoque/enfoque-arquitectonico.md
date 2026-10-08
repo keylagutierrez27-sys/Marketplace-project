@@ -48,27 +48,8 @@ Con esa referencia se decidió aplicar **Clean Architecture dentro de cada módu
 Se descartaron MVC simple y capas tradicionales porque acoplan la lógica a la base de datos y al framework. El costo es una estructura inicial con más carpetas e interfaces, que se compensa con las pruebas del dominio sin base de datos y la facilidad de cambio.
 
 ## Relación con el estilo arquitectónico
-El estilo (monolito modular en capas, ver `../estilo-arquitectonico.md`) define cómo se organiza y despliega el sistema completo. Clean Architecture define cómo se organizan las dependencias dentro de cada módulo.
+El estilo define cómo se organiza y despliega el sistema completo. Clean Architecture define cómo se organizan las dependencias dentro de cada módulo.
 
 ## Diagrama
-```mermaid
-flowchart LR
-  subgraph PRES["Presentación"]
-    R["Rutas y controllers Express"]
-  end
-  subgraph APP["Aplicación"]
-    CU["Casos de uso<br/>RegistrarOrden · SubirComprobante · ConfirmarPagoProveedor · ReservarSala"]
-  end
-  subgraph DOM["Dominio"]
-    ENT["Entidades y reglas<br/>Orden · Comprobante · Reserva · Publicacion"]
-    PUE["Puertos<br/>RepositorioOrdenes · AlmacenComprobantes · NotificadorUsuario"]
-  end
-  subgraph INF["Infraestructura"]
-    ADA["Adaptadores<br/>RepositorioOrdenesPostgres · AlmacenComprobantesSupabase · NotificadorFirebase"]
-  end
-  R --> CU
-  CU --> ENT
-  CU --> PUE
-  ADA -. "implementa" .-> PUE
-  ADA --> EXT["PostgreSQL · Supabase Storage · Firebase"]
-```
+
+![Diagrama del enfoque arquitectónico](img/Enfoque.png)

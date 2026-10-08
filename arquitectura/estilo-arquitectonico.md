@@ -37,28 +37,5 @@ Auth & Security, Users, Catalog, Search & Recommendations, Orders & Transactions
 | Archivos (imágenes y comprobantes) | Supabase Storage |
 
 ## Diagrama
-```mermaid
-flowchart TB
-  U["Estudiante Comprador · Estudiante Proveedor · Administrador"]
-  CF["Cloudflare<br/>DNS · HTTPS/SSL-TLS · CDN · caché · WAF"]
-  WEB["Web React / Next.js PWA<br/>Vercel"]
-  MOV["App móvil<br/>React Native"]
-  U --> CF
-  CF --> WEB
-  CF --> MOV
-  WEB -->|"REST / JSON · HTTPS"| API
-  MOV -->|"REST / JSON · HTTPS"| API
-  subgraph B["Backend: monolito modular · Node.js + Express · un solo despliegue"]
-    direction TB
-    API["1. Presentación<br/>routes · controllers · middlewares de auth, validación y errores"]
-    NEG["2. Lógica de negocio · un service por módulo<br/>Auth · Users · Catalog · Search · Orders · Booking · Notifications · Admin · AI Assistant"]
-    DAT["3. Datos<br/>repositories · ORM"]
-    API --> NEG
-    NEG --> DAT
-  end
-  DAT --> DB[("Supabase PostgreSQL")]
-  NEG --> ST[("Supabase Storage<br/>imágenes y comprobantes")]
-  NEG -.-> AUTH["Supabase Auth<br/>correo institucional"]
-  NEG -.-> NOT["Correo / Push FCM"]
-  NEG -.-> IA["Servicio de IA opcional"]
-```
+
+![Diagrama del enfoque arquitectónico](img/Estilo.png)
