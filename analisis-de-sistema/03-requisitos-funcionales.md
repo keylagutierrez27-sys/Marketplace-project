@@ -1,41 +1,54 @@
-# 03. Requisitos Funcionales - UniMarket
+# 03. Requisitos funcionales - UniMarket
 
-Listado formal de los requerimientos funcionales extraídos de la propuesta técnica del sistema.
+Requisitos funcionales extraídos de la propuesta técnica. La interfaz adaptativa pasó a atributos de calidad (AC07) y la infraestructura perimetral a restricciones (RC08), porque no son requisitos funcionales.
 
----
+## Gestión de usuarios y accesos (Auth & Security / Users)
+| ID | Requisito |
+|---|---|
+| RF-01 | El sistema debe validar que el usuario pertenezca a la comunidad universitaria mediante correo institucional (`@universidad.edu.pe`) y sus credenciales de red. |
+| RF-02 | El sistema debe asignar permisos y roles diferenciados (Estudiante Comprador, Estudiante Proveedor y Administrador) tras el inicio de sesión. |
 
-## 1. Módulo de Gestión de Usuarios y Accesos
-* **RF-01:** El sistema validará obligatoriamente que el usuario pertenezca a la comunidad universitaria mediante correo institucional (`Nombre_estudiante@universidad.edu.pe`) y contraseña de red.
-* **RF-02:** El sistema asignará permisos y roles diferenciados de manera estricta entre **Estudiante Comprador** y **Estudiante Proveedor**.
-* **RF-03:** La interfaz de usuario deberá ser intuitiva, amigable y responsiva, compatible con dispositivos móviles y navegadores web modernos.
+## Publicación y catálogo (Catalog / Search)
+| ID | Requisito |
+|---|---|
+| RF-03 | Los proveedores deben poder publicar bienes (libros, productos usados) con categoría, estado, precio e imágenes. |
+| RF-04 | Los proveedores de servicios (tutorías, diseño, programación, impresión) deben registrar su portafolio y tarifas por hora o proyecto. |
+| RF-05 | El sistema debe permitir búsqueda avanzada y filtrado por categoría, rango de precios y valoración. |
 
-## 2. Módulo de Publicación y Catálogo
-* **RF-04:** El sistema permitirá a los proveedores publicar bienes (libros, productos usados) especificando categoría, estado de conservación, precio e imágenes mediante el almacenamiento en la nube.
-* **RF-05:** El sistema permitirá a los proveedores de servicios (tutorías, diseño, programación, impresión) registrar su portafolio profesional y tarifas estipuladas por hora o por proyecto.
-* **RF-06:** El sistema incluirá un mecanismo de búsqueda avanzada y filtrado multicriterio por categoría, rango de precios y valoración de usuarios.
+## Transacciones y pagos (Orders & Transactions)
+| ID | Requisito |
+|---|---|
+| RF-06 | El sistema debe mostrar los datos o el código QR de pago del proveedor (Yape, Plin o transferencia) en cada transacción, sin procesar ni retener fondos. |
+| RF-07 | El sistema debe permitir al comprador cargar el comprobante digital, al proveedor confirmarlo en tiempo real, y generar una constancia virtual automática para ambas partes. |
 
-## 3. Módulo de Transacciones y Pagos
-* **RF-07:** El sistema integrará un modelo de pagos directos Peer-to-Peer (Yape / Plin / Transferencia bancaria), mostrando los datos o códigos QR del estudiante proveedor en cada transacción para eliminar comisiones de pasarelas intermediarias.
-* **RF-08:** El sistema gestionará la trazabilidad del proceso mediante la carga de comprobantes digitales por parte del comprador y la validación/confirmación en tiempo real por el proveedor.
-* **RF-09:** El sistema generará constancias virtuales automáticas de transacción para ambas partes involucradas.
+## Reservas y horarios (Booking & Schedule / Notifications)
+| ID | Requisito |
+|---|---|
+| RF-08 | El sistema debe mostrar la disponibilidad de horarios en tiempo real para tutorías y salas, evitando cruces o duplicidad de citas. |
+| RF-09 | El sistema debe enviar confirmaciones y notificaciones automáticas (correo y push) de reservas, pedidos y cambios de estado. |
 
-## 4. Módulo de Reservas y Horarios
-* **RF-10:** El módulo de tutorías y reserva de salas visualizará la disponibilidad de horarios en tiempo real para evitar cruces o duplicidad de citas.
-* **RF-11:** El sistema enviará notificaciones y confirmaciones automáticas de reserva de salas y citas de tutoría.
+## Administración e informes (Administration & Reports)
+| ID | Requisito |
+|---|---|
+| RF-10 | El administrador debe ver reportes estadísticos de ventas, publicaciones activas y volumen de transacciones por facultad o categoría. |
+| RF-11 | El sistema debe mantener registros de auditoría y generar reportes exportables en Excel sobre incidencias y disputas. |
 
-## 5. Módulo de Administración e Informes
-* **RF-12:** El administrador general visualizará reportes estadísticos consolidados de ventas, cantidad de publicaciones activas y volumen de transacciones segmentadas por facultades o categorías.
-* **RF-13:** El sistema mantendrá registros de auditoría y generará reportes exportables en formato Excel sobre incidencias y disputas entre usuarios.
+## Reputación y asistente (Catalog / AI Assistant)
+| ID | Requisito |
+|---|---|
+| RF-12 | El sistema debe permitir valorar a los proveedores tras una transacción completada y mostrar su historial de ventas y reputación. |
+| RF-13 | De forma opcional, el sistema podrá incluir un asistente inteligente ligero que interprete consultas en lenguaje natural y sugiera productos o servicios. |
 
----
-
-## Relación entre Historias de Usuario (HU) y Requisitos Funcionales (RF)
-
-| Historia de Usuario | Descripción breve | Requisitos Funcionales Asociados |
-| :--- | :--- | :--- |
-| **HU-01** | Autenticación Institucional | RF-01, RF-02, RF-03 |
-| **HU-02** | Publicación de Productos Usados | RF-04, RF-06 |
-| **HU-03** | Publicación de Servicios Profesionales | RF-05, RF-06 |
-| **HU-04** | Búsqueda Avanzada y Filtros | RF-06 |
-| **HU-05** | Pago Directo Peer-to-Peer y Comprobante | RF-07, RF-08, RF-09 |
-| **HU-06** | Reserva de Salas y Tutorías en Tiempo Real | RF-10, RF-11 |
+## Relación entre historias de usuario (HU) y requisitos funcionales (RF)
+| Historia de usuario | Requisitos funcionales |
+|---|---|
+| HU01 Autenticación institucional | RF-01, RF-02 |
+| HU02 Publicación de bienes | RF-03 |
+| HU03 Registro de servicios profesionales | RF-04, RF-08 |
+| HU04 Búsqueda y filtrado avanzado | RF-05 |
+| HU05 Realizar pagos directos P2P | RF-06 |
+| HU06 Carga de comprobantes y validación | RF-07, RF-09 |
+| HU07 Reserva de salas y tutorías en tiempo real | RF-08, RF-09 |
+| HU08 Visualización de reportes estadísticos | RF-10, RF-11 |
+| HU09 Valoración y reputación de proveedores | RF-12 |
+| HU10 Consultas en lenguaje natural | RF-13 |
