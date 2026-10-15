@@ -27,13 +27,13 @@ flowchart LR
     R -.->|Push / correo| N["Firebase / SMTP"]
 ```
 
-![Diagrama de contenedores y flujo de infraestructura](docs/img/Diagrama-Contenedores.png)
+![Diagrama de contenedores y flujo de infraestructura](img/Diagrama-Contenedores.png)
 
 ## 2. Flujo representativo: pago P2P
 
 El comprador crea una orden (estado `PENDING_PAYMENT`), paga fuera de UniMarket por Yape/Plin/transferencia y sube el voucher a Supabase Storage (`EVIDENCE_SUBMITTED`); el proveedor confirma o rechaza. El backend es *stateless*: el estado vive en la base de datos, no en la memoria del servidor.
 
-![Secuencia de pago P2P](../img/secuencia-pago-p2p.png)
+![Secuencia de pago P2P](img/Diagrama-Secuencia-P2P.png)
 
 ## 3. Límites y escalamiento
 
