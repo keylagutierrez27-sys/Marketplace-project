@@ -1,6 +1,6 @@
 # Estilo arquitectónico
 
-**Monolito modular** (ocho módulos) con **Clean Architecture** y **Arquitectura Hexagonal** dentro de cada módulo (ADR-001, ADR-002, ADR-004). Clean Architecture fija la dirección de las dependencias; la Hexagonal aporta puertos y adaptadores para aislar el dominio de bases de datos, frameworks y APIs externas.
+**Monolito modular** con **Clean Architecture** y **Arquitectura Hexagonal** dentro de cada módulo (ADR-001, ADR-002, ADR-004). Clean Architecture fija la dirección de las dependencias; la Hexagonal aporta puertos y adaptadores para aislar el dominio de bases de datos, frameworks y APIs externas.
 
 ## Capas por módulo
 
