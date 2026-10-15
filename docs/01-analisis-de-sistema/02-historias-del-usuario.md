@@ -4,102 +4,53 @@ A continuación se detallan las historias de usuario clave agrupadas por módulo
 
 ---
 
-## Módulo: Gestión de Usuarios y Accesos
+## Módulo 1: Gestión de Usuarios y Accesos (`auth/users`)
 
-### HU-01: Autenticación Institucional
-* **Como** estudiante de la comunidad universitaria,
-* **quiero** iniciar sesión utilizando mi correo institucional y contraseña de red,
-* **para** garantizar que solo miembros verificados accedan a la plataforma de UniMarket.
-* **Criterios de Aceptación:**
-  1. El sistema valida obligatoriamente dominios institucionales (`@universidad.edu.pe`).
-  2. Se asignan roles diferenciados de forma automática (Estudiante Comprador / Estudiante Proveedor).
+| ID | Historia de usuario | Criterios de aceptación |
+| :--- | :--- | :--- |
+| **HU-01** | Como estudiante de la comunidad universitaria, quiero iniciar sesión con mi correo institucional verificado, para garantizar que solo miembros verificados accedan a UniMarket. | **1)** El sistema rechaza correos fuera del dominio institucional.<br>**2)** El correo se verifica por enlace o código y se emite un token JWT.<br>**3)** Todo usuario recibe el rol Comprador; al activar su perfil de proveedor obtiene también el rol Proveedor. |
 
 ---
 
-## Módulo: Publicación y Catálogo
+## Módulo 2: Publicación y Catálogo (`catalog/search-ai`)
 
-### HU-02: Publicación de Productos Usados
-* **Como** estudiante proveedor,
-* **quiero** publicar libros o artículos usados especificando categoría, estado, precio e imágenes,
-* **para** ofrecerlos de forma visible a los compradores interesados del campus.
-* **Criterios de Aceptación:**
-  1. El formulario solicita obligatoriamente: título, categoría, estado físico, precio en Soles e imágenes.
-  2. El producto se indexa inmediatamente en el catálogo general.
-
-### HU-03: Publicación de Servicios Profesionales
-* **Como** estudiante proveedor de servicios (tutorías, programación, diseño, impresión),
-* **quiero** registrar mi portafolio y tarifas por hora o proyecto,
-* **para** que los compradores puedan conocer mis habilidades y contratarlos.
-* **Criterios de Aceptación:**
-  1. Permite adjuntar evidencias de portafolio o descripción detallada del servicio.
-  2. Muestra claramente la tarifa establecida.
-
-### HU-04: Búsqueda Avanzada y Filtros
-* **Como** estudiante comprador,
-* **quiero** buscar y filtrar productos o servicios por categoría, precio y valoración,
-* **para** encontrar rápidamente lo que necesito al mejor precio.
-* **Criterios de Aceptación:**
-  1. Barra de búsqueda rápida conectada al motor de búsqueda.
-  2. Filtros dinámicos por rango de precios y categorías académicas.
+| ID | Historia de usuario | Criterios de aceptación |
+| :--- | :--- | :--- |
+| **HU-02** | Como estudiante proveedor, quiero publicar libros o artículos usados con categoría, estado, precio e imágenes, para ofrecerlos a los compradores del campus. | **1)** El formulario exige título, categoría, estado (Nuevo/Usado), precio en soles e imágenes.<br>**2)** Las imágenes se almacenan en la nube (Supabase Storage).<br>**3)** La publicación aparece de inmediato en el catálogo. |
+| **HU-03** | Como estudiante proveedor de servicios (tutorías, programación, diseño, impresión), quiero registrar mi portafolio, tarifas y disponibilidad, para que los compradores conozcan mis habilidades y me contraten. | **1)** Permite adjuntar evidencias de portafolio o una descripción detallada.<br>**2)** Muestra la tarifa (por hora, página, proyecto o unidad).<br>**3)** Permite definir franjas de disponibilidad en las tutorías.<br>**4)** Asocia la publicación al perfil del proveedor. |
+| **HU-04** | Como estudiante comprador, quiero buscar y filtrar productos o servicios por categoría, facultad, precio y valoración, para encontrar rápido lo que necesito al mejor precio. | **1)** Barra de búsqueda con filtros dinámicos por rango de precios, facultad, categoría y valoración.<br>**2)** Respuesta de búsqueda inferior a 1.5 segundos en las pruebas de carga.<br>**3)** La búsqueda funciona sin IA; la IA solo añade consultas en lenguaje natural (HU-10). |
 
 ---
 
-## Módulo: Transacciones y Pagos
+## Módulo 3: Transacciones y Pagos P2P (`orders`)
 
-### HU05: Realizar Pagos Directos P2P
-
-**Como** estudiante comprador,
-
-**quiero** visualizar los datos o el código QR de pago (Yape, Plin o transferencia) del estudiante proveedor,
-
-**para** realizar la transacción de forma directa sin intermediarios.
-
-#### Criterios de Aceptación
-
-  1. El sistema debe mostrar los datos de pago exactos del roveedor al confirmar la orden.
-  2. No debe haber retención ni procesamiento de fondos por parte de la plataforma (modelo P2P puro).
-
-### HU06: Carga de Comprobantes y Validación
-
-**Como** estudiante comprador y proveedor,
-
-**quiero** subir el comprobante digital (voucher) y que el proveedor pueda confirmarlo en tiempo real,
-
-**para** asegurar la trazabilidad y cerrar la transacción exitosamente.
-
-#### Criterios de Aceptación
-
-  1. El comprador debe poder adjuntar la imagen del comprobante de pago.
-  2. El proveedor recibirá una alerta para verificar el depósito y confirmar la entrega o servicio, generando una constancia virtual.
-
+| ID | Historia de usuario | Criterios de aceptación |
+| :--- | :--- | :--- |
+| **HU-05** | Como estudiante comprador, quiero ver los datos de pago o el código QR (Yape, Plin o transferencia) del proveedor, para pagar directamente sin intermediarios. | **1)** Al crear la orden, el sistema muestra los datos de pago y el QR del proveedor.<br>**2)** UniMarket no retiene ni custodia fondos ni cobra comisión.<br>**3)** La orden queda en estado `Pendiente de pago`. |
+| **HU-06** | Como estudiante comprador y proveedor, quiero subir y revisar el comprobante digital (voucher), para asegurar la trazabilidad y cerrar la transacción. | **1)** El comprador adjunta una imagen legible del voucher y la orden pasa a `Comprobante enviado`.<br>**2)** El proveedor recibe una notificación, revisa el voucher y confirma o rechaza.<br>**3)** Al confirmar, el estado pasa a `Pago confirmado` y el sistema emite la constancia virtual.<br>**4)** La orden pasa a `Completada` cuando el comprador confirma la recepción del bien o servicio.<br>**5)** Si el proveedor no responde en el plazo configurado, la orden pasa a `Vencida` y ambos son notificados. |
 
 ---
 
-## Módulo: Reservas y Horarios
+## Módulo 4: Reservas y Agendamiento (`booking`)
 
-### HU-07: Reserva de Salas y Tutorías en Tiempo Real
-* **Como** estudiante comprador,
-* **quiero** visualizar la disponibilidad de horarios en tiempo real para tutorías o salas,
-* **para** evitar cruces o duplicidad de citas.
-* **Criterios de Aceptación:**
-  1. Calendario interactivo con franjas horarias ocupadas y libres.
-  2. Envío automático de confirmación de reserva al completarse el proceso.
-
+| ID | Historia de usuario | Criterios de aceptación |
+| :--- | :--- | :--- |
+| **HU-07** | Como estudiante comprador, quiero ver la disponibilidad de tutorías y salas de estudio en tiempo real, para agendar citas sin cruces ni duplicidad. | **1)** Calendario que muestra solo franjas libres.<br>**2)** Al solicitar una reserva, la franja se bloquea de inmediato mediante transacción en la base de datos.<br>**3)** Se envían confirmaciones por correo o push al comprador y al proveedor (en salas, al administrador del espacio). |
 
 ---
 
+## Módulo 5: Administración y Auditoría (`administration`)
 
-## Módulo: Administración e Informes
+| ID | Historia de usuario | Criterios de aceptación |
+| :--- | :--- | :--- |
+| **HU-08** | Como administrador general, quiero ver reportes estadísticos de ventas, publicaciones y transacciones por facultad, para supervisar el rendimiento de la plataforma. | **1)** Panel con métricas de usuarios activos, publicaciones activas y volumen transaccional por facultad o categoría.<br>**2)** Acceso a registros de auditoría.<br>**3)** Exportación de reportes en formato Excel (`.xlsx`). |
+| **HU-11** | Como administrador general, quiero moderar publicaciones, suspender usuarios y atender incidencias o disputas entre compradores y proveedores, para resolver conflictos con evidencia. | **1)** Puede ocultar o eliminar publicaciones inapropiadas y suspender cuentas.<br>**2)** Un participante puede reportar una incidencia sobre una orden, que pasa a `En disputa`.<br>**3)** El administrador ve la trazabilidad completa (estados, voucher, notificaciones) y registra su resolución en la auditoría. |
 
-### HU08: Visualización de Reportes Estadísticos
+---
 
-**Como** administrador general,
+## Módulo 6: Reputación y Asistencia Inteligente (`users/search-ai`)
 
-**quiero** visualizar reportes estadísticos de ventas, publicaciones activas y volumen de transacciones por facultad o categoría,
-
-**para** supervisar el rendimiento y la actividad de la plataforma.
-
-#### Criterios de Aceptación
-
-  1. El panel de administración debe mostrar métricas actualizadas de la comunidad (hasta 15,000 estudiantes).
-  2. Se deben incluir registros de auditoría y la opción de exportar reportes en formato Excel sobre disputas o incidencias.
+| ID | Historia de usuario | Criterios de aceptación |
+| :--- | :--- | :--- |
+| **HU-09** | Como estudiante comprador, quiero calificar con estrellas y reseñar a un proveedor tras completar una orden, para orientar a otros compradores. | **1)** Solo puede calificar quien tenga una orden `Completada` con ese proveedor.<br>**2)** Se permite una reseña por orden.<br>**3)** El perfil público del proveedor muestra su promedio e historial. |
+| **HU-10** | Como estudiante comprador, quiero hacer consultas en lenguaje natural, para que el asistente me sugiera productos o servicios relevantes. | **1)** Función opcional, activable por configuración.<br>**2)** El asistente solo sugiere publicaciones existentes en el catálogo.<br>**3)** Si el proveedor de IA falla o se agota su cuota, la búsqueda normal sigue funcionando. |
