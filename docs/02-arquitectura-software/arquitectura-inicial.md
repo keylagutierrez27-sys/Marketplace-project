@@ -16,16 +16,7 @@ Los clientes web y móvil consumen una API REST versionada bajo `/api/v1`. Cloud
 | Borde y entrega | Cloudflare: DNS, HTTPS/TLS, CDN, caché de contenido público y protección perimetral |
 | IA externa | Proveedor intercambiable detrás de una interfaz; opcional y con límites de consumo |
 
-```mermaid
-flowchart LR
-    C["Clientes: PWA Web / App móvil"] -->|HTTPS| CF["Cloudflare: DNS, SSL, CDN, WAF"]
-    CF --> V["Vercel: Frontend Next.js"]
-    CF -->|"/api/v1"| R["Render: API Node.js + Express (monolito modular)"]
-    R -->|"SQL / ORM"| DB[("Supabase PostgreSQL")]
-    R -->|Archivos| ST[("Supabase Storage")]
-    R -.->|opcional| IA["Proveedor de IA"]
-    R -.->|Push / correo| N["Firebase / SMTP"]
-```
+
 
 ![Diagrama de contenedores y flujo de infraestructura](img/Diagrama-Contenedores.png)
 
