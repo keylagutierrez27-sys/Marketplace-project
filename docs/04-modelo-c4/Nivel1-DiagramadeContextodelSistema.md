@@ -48,7 +48,7 @@ flowchart TB
 
 | Persona | Descripción | Qué hace en el sistema |
 |---|---|---|
-| **Estudiante Comprador** | Rol de todo estudiante con correo institucional verificado | Busca y filtra el catálogo, crea órdenes, reserva tutorías y salas, sube el voucher de pago, confirma la recepción y califica al proveedor |
+| **Estudiante Comprador** | Rol de todo estudiante con correo institucional verificado | Busca y filtra el catálogo, crea órdenes, reserva tutorías y salas, sube el voucher de pago, confirma la recepción y califica al proveedor. |
 | **Estudiante Proveedor** | Estudiante que activó su perfil de proveedor (medio de pago P2P y contacto) | Publica bienes y servicios, define su disponibilidad, revisa vouchers y confirma o rechaza pagos |
 | **Administrador** | Responsable de la operación, con permisos elevados y 2FA | Modera publicaciones, suspende cuentas, atiende incidencias, audita y exporta reportes |
 
