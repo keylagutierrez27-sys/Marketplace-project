@@ -1,7 +1,7 @@
 # Estilo arquitectónico - UniMarket
 
 ## Estilo seleccionado
-**Monolito modular con arquitectura en capas** (presentación, lógica de negocio y datos). El backend (Node.js + Express) es una sola aplicación desplegable, dividida en módulos, con una sola base de datos PostgreSQL (Supabase). La web (React / Next.js PWA) y la app móvil (React Native) lo consumen mediante una API REST, con Cloudflare como capa perimetral.
+**Monolito modular con arquitectura en capas** (presentación, lógica de negocio y datos). El backend es una sola aplicación desplegable, dividida estrictamente por módulos de dominio, operando con una única base de datos PostgreSQL (Supabase), las transacciones se gestionan mediante un modelo Peer-to-Peer (Yape/Plin/Transferencia) con validación de comprobantes. La web (React / Next.js PWA) y la app móvil (React Native) lo consumen mediante una API REST, con Cloudflare como capa perimetral.
 
 Capas = organización lógica. Monolito = unidad de despliegue. Ambos conviven.
 
@@ -18,7 +18,7 @@ Capas = organización lógica. Monolito = unidad de despliegue. Ambos conviven.
 La propuesta descarta microservicios como arquitectura principal. La separación modular permite extraer un componente más adelante si hiciera falta.
 
 ## Módulos
-Auth & Security, Users, Catalog, Search & Recommendations, Orders & Transactions, Booking & Schedule, Notifications, Administration & Reports y AI Assistant (opcional).
+Auth & Security, Users, Catalog, Search & Recommendations, Orders & Transactions (con soporte de pagos P2P directos y comprobantes), Booking & Schedule, Notifications, Administration & Reports y AI Assistant (opcional).
 
 ## Reglas del estilo
 1. Cada capa solo invoca a la capa inmediatamente inferior.
