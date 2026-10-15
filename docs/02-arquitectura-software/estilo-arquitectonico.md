@@ -13,7 +13,7 @@
 
 **Regla de dependencias:** presentación e infraestructura dependen de aplicación y de los contratos hacia el núcleo; el dominio no depende de frameworks ni de servicios externos. Las implementaciones se conectan en el *composition root*.
 
-![Capas de Clean Architecture](../img/clean-architecture-capas.png)
+![Capas de Clean Architecture](img/Clean-arquitecture.png)
 
 ## Estructura de carpetas
 
