@@ -27,7 +27,7 @@ flowchart LR
     R -.->|Push / correo| N["Firebase / SMTP"]
 ```
 
-![Diagrama de contenedores y flujo de infraestructura](../img/Diagrama-Contenedores.png)
+![Diagrama de contenedores y flujo de infraestructura](docs/img/Diagrama-Contenedores.png)
 
 ## 2. Flujo representativo: pago P2P
 
