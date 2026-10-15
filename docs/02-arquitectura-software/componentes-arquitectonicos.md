@@ -16,7 +16,7 @@ UniMarket define **ocho módulos** dentro del backend. El asistente de IA es una
 ## Diagrama de componentes
 
 
-![Diagrama de componentes del backend](../img/Diagrama-Componentes-Backend.png)
+![Diagrama de componentes del backend](../../img/Diagrama-Componentes-Backend.png)
 
 ## Reglas de interacción
 

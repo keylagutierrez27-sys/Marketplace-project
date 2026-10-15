@@ -18,7 +18,7 @@ Los clientes web y móvil consumen una API REST versionada bajo `/api/v1`. Cloud
 
 
 
-![Diagrama de contenedores y flujo de infraestructura](../img/Diagrama-Contenedores.png)
+![Diagrama de contenedores y flujo de infraestructura](../../img/Diagrama-Contenedores.png)
 
 ## 2. Flujo representativo: pago P2P
 
