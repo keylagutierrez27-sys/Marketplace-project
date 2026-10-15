@@ -21,33 +21,7 @@ Abrir la caja «UniMarket» del nivel 1 y mostrar los **contenedores** que la fo
 
 ## 2. Diagrama
 
-```mermaid
-flowchart TB
-    U(["Comprador, Proveedor y Administrador"])
-    CF["Cloudflare<br/>DNS, SSL, CDN, WAF"]
-    subgraph UM["UniMarket"]
-        WEB["PWA Web<br/>Next.js en Vercel"]
-        MOB["App móvil<br/>React Native (prevista)"]
-        API["API UniMarket<br/>Node.js + Express + TypeScript en Render<br/>Monolito modular"]
-        DB[("Base de datos<br/>PostgreSQL en Supabase")]
-        ST[("Almacenamiento<br/>Supabase Storage privado")]
-    end
-    AUTH["Supabase Auth"]
-    IA["Proveedor de IA (opcional)"]
-    PUSH["Firebase / SMTP"]
-    U --> CF
-    CF --> WEB
-    CF --> MOB
-    WEB -->|"HTTPS/JSON /api/v1"| API
-    MOB -->|"HTTPS/JSON /api/v1"| API
-    API -->|"SQL"| DB
-    API -->|"URL firmada"| ST
-    API -->|"Verifica JWT"| AUTH
-    API -.->|"HTTPS/REST"| IA
-    API -->|"Push / correo"| PUSH
-```
-
----
+![Diagrama de componentes](../../img/Diagrama-Contenedores.png)
 
 ## 3. Contenedores
 

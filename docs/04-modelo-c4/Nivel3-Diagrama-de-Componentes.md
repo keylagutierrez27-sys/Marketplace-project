@@ -21,38 +21,8 @@ Abrir el contenedor **API UniMarket** del nivel 2 y mostrar sus **componentes**:
 
 ## 2. Diagrama
 
-```mermaid
-flowchart TB
-    CLI["PWA Web / App móvil"] -->|"HTTPS/JSON"| REST["API REST /api/v1<br/>authMiddleware + requireRole"]
-    subgraph API["API UniMarket - monolito modular"]
-        AUTH["Auth & Security"]
-        USR["Users & Reputation"]
-        CAT["Catalog & Listings"]
-        ORD["Orders & P2P"]
-        BKG["Booking & Schedule"]
-        SRC["Search & AI"]
-        NOT["Notifications"]
-        ADM["Administration"]
-    end
-    REST --> AUTH
-    REST --> ORD
-    ORD -->|"ListingReader"| CAT
-    ORD -->|"OrderStatusChanged"| NOT
-    ORD -->|"AuditLogPort"| ADM
-    USR -->|"Consulta orden COMPLETED"| ORD
-    BKG -->|"ReservationConfirmed"| NOT
-    BKG -->|"Asocia tutoría"| CAT
-    SRC -->|"SearchReader (lectura)"| CAT
-    ADM -->|"Modera"| USR
-    API -->|"SQL"| DB[("PostgreSQL")]
-    ORD -->|"Vouchers"| ST[("Supabase Storage")]
-    CAT -->|"Imágenes"| ST
-    AUTH -->|"Verifica JWT"| SA["Supabase Auth"]
-    NOT -->|"Correo / push"| EXT["SMTP / Firebase"]
-    SRC -.->|"Opcional"| IA["Proveedor de IA"]
-```
+![Diagrama de componentes](../../img/Diagrama-Componentes-Backend.png)
 
----
 
 ## 3. Componentes
 
