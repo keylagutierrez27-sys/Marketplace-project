@@ -1,14 +1,16 @@
 # 07. Decisiones arquitectónicas - UniMarket
 
+Registros de Decisiones Arquitectónicas (ADRs) de UniMarket, justificando las selecciones tecnológicas y de diseño frente a los Drivers Arquitectónicos.
 
-| ID | Decisión arquitectónica | Driver relacionado | Justificación | Resultado |
-|---|---|---|---|---|
-| ADR-001 | Monolito modular | DA01, DA04, DA05 | Organizar las funcionalidades en módulos independientes dentro de una sola aplicación desplegable y escalable horizontalmente. | Módulos Auth & Security, Users, Catalog, Search, Orders, Booking, Notifications, Administration y AI Assistant. |
-| ADR-002 | Clean Architecture dentro de cada módulo | DA05 | Separar las reglas de negocio de los detalles tecnológicos. | Dominio, Aplicación, Infraestructura y Presentación por módulo. |
-| ADR-003 | Estrategia de caché en dos niveles | DA09, DA06 | Reducir consultas repetitivas y carga al origen. | CDN y caché de Cloudflare, caché de consultas frecuentes e índices. |
-| ADR-004 | Pagos P2P con puertos y adaptadores | DA03 | Dar trazabilidad sin procesar fondos y desacoplar el dominio de los proveedores. | Flujo orden, comprobante, confirmación y constancia, con puertos de almacenamiento y notificación. |
-| ADR-005 | Autenticación institucional y RBAC | DA02 | Restringir el acceso a la comunidad universitaria y controlar permisos por rol. | Supabase Auth con correo institucional y autorización en la API. |
-| ADR-006 | Integridad de reservas | DA07 | Evitar reservas cruzadas con solicitudes simultáneas. | Regla en el dominio y restricciones y transacciones en PostgreSQL. |
-| ADR-007 | Cloudflare y servicios PaaS de capa gratuita | DA01, DA06 | Cumplir el presupuesto y centralizar la capa perimetral. | Cloudflare, Vercel, Render o Railway, y Supabase. |
-| ADR-008 | IA como servicio desacoplado | DA08 | Que el asistente sea opcional y no afecte al núcleo. | Puerto AsistenteBusqueda con adaptador a una API externa o de código abierto. |
-| ADR-009 | API REST única y versionada | DA10 | Que web y móvil consuman el mismo backend. | Endpoints bajo `/api/v1` con JSON sobre HTTPS. |
+| ID | Decisión | Driver | Justificación técnica | Resultado en la arquitectura |
+| :--- | :--- | :--- | :--- | :--- |
+| **ADR-001** | **Monolito modular** | DA01, DA04, DA05 | Módulos independientes en una sola aplicación desplegable reducen la complejidad operativa y permiten escalar horizontalmente[cite: 17]. | Ocho módulos: `auth`, `users`, `catalog`, `orders`, `booking`, `search-ai`, `notifications` y `administration`. El asistente de IA es parte de `search-ai`[cite: 17]. |
+| **ADR-002** | **Clean Architecture dentro de cada módulo** | DA05 | Separa las reglas de negocio de los detalles de infraestructura, frameworks y base de datos[cite: 17]. | Cuatro capas por módulo: dominio, aplicación, infraestructura y presentación[cite: 17]. |
+| **ADR-003** | **Caché en dos niveles** | DA06, DA09 | Menos consultas repetidas a la base y menos carga al servidor de origen[cite: 17]. | Caché en el borde (Cloudflare) solo para contenido público, caché de aplicación para consultas públicas frecuentes e índices B-Tree. Nunca se cachean respuestas privadas ni disponibilidad sensible[cite: 17]. |
+| **ADR-004** | **Pagos P2P con Strategy y puertos/adaptadores** | DA03 | Trazabilidad sin capturar ni custodiar fondos, y dominio desacoplado de los medios de pago[cite: 17]. | Flujo: orden creada, comprobante cargado, verificación del proveedor, constancia virtual. Strategy por medio (Yape, Plin, transferencia) y adaptadores de almacenamiento y notificación[cite: 17]. |
+| **ADR-005** | **Autenticación institucional y RBAC** | DA02 | Restringir el acceso a la comunidad activa y autorizar por rol en la API[cite: 17]. | Supabase Auth con filtro de dominio institucional, JWT y RBAC. SSO/OAuth solo si la universidad lo autoriza[cite: 17]. |
+| **ADR-006** | **Integridad de reservas** | DA07 | Evitar traslapes y dobles reservas ante peticiones simultáneas[cite: 17, 18]. | Reglas en la entidad de dominio y restricción de exclusión transaccional (ACID) en PostgreSQL[cite: 17, 18]. |
+| **ADR-007** | **Cloudflare y PaaS en capa gratuita, un proveedor por capa** | DA01, DA06 | Ajustarse al presupuesto resolviendo la seguridad perimetral de forma centralizada[cite: 18]. | Cloudflare (DNS, SSL, CDN, protección), Vercel (frontend), Render (backend; Railway como alternativa) y Supabase (base de datos y archivos)[cite: 18]. |
+| **ADR-008** | **IA como servicio desacoplado y opcional** | DA08 | El asistente no debe comprometer el núcleo del sistema[cite: 18]. | Puerto `AIProviderPort` con adaptadores a una API externa o a un modelo de código abierto, detrás de `SearchAssistantFacade`[cite: 18]. |
+| **ADR-009** | **API REST única y versionada** | DA10 | Que web y móvil consuman la misma lógica de negocio[cite: 18]. | Endpoints bajo `/api/v1` con payloads JSON[cite: 18]. |
+| **ADR-010** | **Archivos privados y minimización de datos** | DA11 | Cumplir la Ley N.º 29733 y evitar fugas de comprobantes[cite: 18]. | Bucket privado con URL firmada de corta duración, verificación de propiedad en cada descarga y logs sin tokens ni datos bancarios[cite: 18]. |
